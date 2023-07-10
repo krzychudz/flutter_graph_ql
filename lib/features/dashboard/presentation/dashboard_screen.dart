@@ -10,8 +10,9 @@ class DashboardScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
+    return BlocProvider<DashboardCubit>(
       create: (context) => Modular.get<DashboardCubit>()..init(),
+      lazy: false,
       child: const DashboardView(),
     );
   }

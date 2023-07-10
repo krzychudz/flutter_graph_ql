@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_graph_ql/app_module.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:graphql_flutter/graphql_flutter.dart';
 
 void main() {
   runApp(ModularApp(
@@ -26,22 +25,3 @@ class Application extends StatelessWidget {
     );
   }
 }
-
-final query = gql('''Query {
-  allFilms {
-    films {
-      title
-      director
-      releaseDate
-      speciesConnection {
-        species {
-          name
-          classification
-          homeworld {
-            name
-          }
-        }
-      }
-    }
-  }
-}''');
