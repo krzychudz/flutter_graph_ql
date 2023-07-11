@@ -5,7 +5,6 @@ class GraphQLApiClient {
   late GraphQLClient _client;
 
   GraphQLApiClient() {
-    print("Create pi client");
     final entryLink = HttpLink(Values.apiUrl);
     _client = GraphQLClient(
       link: entryLink,

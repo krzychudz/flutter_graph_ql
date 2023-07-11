@@ -6,9 +6,7 @@ import 'presentation/dashboard_screen.dart';
 class DashboardModule extends Module {
   @override
   List<Bind> get binds => [
-        Bind.factory<DashboardCubit>((i) => DashboardCubit(
-              i(),
-            )),
+        Bind.factory<DashboardCubit>((i) => DashboardCubit()),
       ];
 
   @override
