@@ -1,5 +1,6 @@
 import 'package:flutter_graph_ql/core/network/services/film/film_service_interface.dart';
 
+import '../../models/film/film.dart';
 import 'film_repository.dart';
 
 class FilmRepository implements FilmRepositoryInterface {
@@ -8,7 +9,8 @@ class FilmRepository implements FilmRepositoryInterface {
   final FilmServiceInterface _filmService;
 
   @override
-  Future<void> getAllFilms() async {
-    // Implement the logic to retrieve and store film data here
+  Future<List<Film>> getAllFilms() async {
+    final filmsResponse = await _filmService.getFilms();
+    return filmsResponse.films;
   }
 }

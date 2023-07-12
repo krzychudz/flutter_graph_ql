@@ -1,5 +1,6 @@
 import 'package:flutter_graph_ql/core/values/values.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
+import 'package:gql/language.dart';
 
 class GraphQLApiClient {
   late GraphQLClient _client;
@@ -18,7 +19,8 @@ class GraphQLApiClient {
     String query, {
     Map<String, dynamic> variables = const {},
   }) async {
-    final options = QueryOptions(document: gql(query), variables: variables);
+    final options =
+        QueryOptions(document: parseString(query), variables: variables);
     final result = await _client.query(options);
 
     return result;
@@ -28,7 +30,8 @@ class GraphQLApiClient {
     String query, {
     Map<String, dynamic> variables = const {},
   }) async {
-    final options = MutationOptions(document: gql(query), variables: variables);
+    final options =
+        MutationOptions(document: parseString(query), variables: variables);
     final result = await _client.mutate(options);
 
     return result;
