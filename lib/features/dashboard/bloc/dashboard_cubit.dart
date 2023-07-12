@@ -8,5 +8,7 @@ class DashboardCubit extends Cubit<int> {
 
   final FilmRepositoryInterface _filmRepository;
 
-  void init() async {}
+  void init() async {
+    final films = await _filmRepository.getAllFilms();
+  }
 }

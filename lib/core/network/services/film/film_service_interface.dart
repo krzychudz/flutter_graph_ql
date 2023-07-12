@@ -1,3 +1,5 @@
+import 'package:flutter_graph_ql/core/models/films_response/films_response.dart';
+
 abstract interface class FilmServiceInterface {
-  Future<void> getFilms();
+  Future<FilmsResponse> getFilms();
 }
