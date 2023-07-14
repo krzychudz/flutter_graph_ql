@@ -16,4 +16,15 @@ class FilmService implements FilmServiceInterface {
     final allFilmsResponse = AllFilmsResponse.fromJson(data.data!);
     return allFilmsResponse.allFilms;
   }
+
+  @override
+  void getFilmDetails(String filmId) async {
+    final data =
+        await _graphQLApiClient.performQuery(filmDetailsQuery, variables: {
+      'filmId': filmId,
+    });
+
+    // final allFilmsResponse = AllFilmsResponse.fromJson(data.data!);
+    // return allFilmsResponse.allFilms;
+  }
 }
