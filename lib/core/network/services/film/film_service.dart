@@ -23,7 +23,7 @@ class FilmService implements FilmServiceInterface {
       filmDetailsQuery,
       variables: {'filmId': filmId},
     );
-    print("RAW DATA: ${data.data}");
+
     final filmDetailsResponse = FilmDetailsResponse.fromJson(data.data!);
     return filmDetailsResponse;
   }
