@@ -1,6 +1,7 @@
-import 'package:flutter_graph_ql/core/models/films_response/films_response.dart';
+import '../../../models/film_details_response/film_details_response.dart';
+import '../../../models/films_response/films_response.dart';
 
 abstract interface class FilmServiceInterface {
   Future<FilmsResponse> getFilms();
-  void getFilmDetails(String filmId);
+  Future<FilmDetailsResponse> getFilmDetails(String filmId);
 }

@@ -1,7 +1,6 @@
-import 'package:flutter_graph_ql/core/network/services/film/film_service_interface.dart';
-
 import '../../models/film/film.dart';
-import 'film_repository.dart';
+import '../../network/services/film/film_service_interface.dart';
+import 'film_repository_interface.dart';
 
 class FilmRepository implements FilmRepositoryInterface {
   FilmRepository(this._filmService);
@@ -12,7 +11,8 @@ class FilmRepository implements FilmRepositoryInterface {
   Future<List<Film>> getAllFilms() async {
     try {
       //ZmlsbXM6MQ==
-      _filmService.getFilmDetails('1');
+      final data = await _filmService.getFilmDetails('1');
+      print("HERE Details: $data");
     } catch (e) {
       print("Error: $e");
     }
