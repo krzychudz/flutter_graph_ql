@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_graph_ql/features/film_details/presentation/film_details_screen.dart';
+import 'package:flutter_modular/flutter_modular.dart' hide Data;
 
 import '../../../core/models/film/film.dart';
 import '../../../core/widgets/general_error/general_error.dart';
@@ -43,7 +45,13 @@ class FilmsList extends StatelessWidget {
       itemCount: films.length,
       itemBuilder: (BuildContext context, int index) {
         final film = films[index];
-        return FilmItem(film: film);
+        return FilmItem(
+          film: film,
+          onTap: (filmId) => Modular.to.pushNamed(
+            FilmDetailsScreen.route,
+            arguments: filmId,
+          ),
+        );
       },
     );
   }

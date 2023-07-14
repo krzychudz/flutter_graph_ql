@@ -6,7 +6,7 @@ import '../character/character_connection/character_connection.dart';
 part 'film_details.freezed.dart';
 part 'film_details.g.dart';
 
-@Freezed(toJson: false)
+@freezed
 class FilmDetails with _$FilmDetails {
   factory FilmDetails({
     required String title,
