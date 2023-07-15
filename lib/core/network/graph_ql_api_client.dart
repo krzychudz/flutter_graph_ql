@@ -1,9 +1,12 @@
+// ignore_for_file: depend_on_referenced_packages
+
 import 'package:flutter_graph_ql/core/values/values.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:gql/language.dart';
 
 class GraphQLApiClient {
   late GraphQLClient _client;
+  GraphQLClient get client => _client;
 
   GraphQLApiClient() {
     final entryLink = HttpLink(Values.apiUrl);
@@ -15,23 +18,29 @@ class GraphQLApiClient {
     );
   }
 
-  Future<QueryResult> performQuery(
+  Future<T> performQuery<T>(
     String query, {
     Map<String, dynamic> variables = const {},
+    T Function(Map<String, dynamic>)? parserFn,
   }) async {
-    final options = QueryOptions(
+    final options = QueryOptions<T>(
       document: parseString(query),
       variables: variables,
       fetchPolicy: FetchPolicy.cacheAndNetwork,
       errorPolicy: ErrorPolicy.ignore,
+      parserFn: parserFn,
     );
-    final result = await _client.query(options);
+    final result = await _client.query<T>(options);
 
     if (result.hasException) {
       throw Exception(result.exception.toString());
     }
 
-    return result;
+    if (result.parsedData == null) {
+      throw Exception('Could not parse the response');
+    }
+
+    return result.parsedData!;
   }
 
   Future<QueryResult> performMutation(
