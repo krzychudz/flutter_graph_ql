@@ -12,19 +12,23 @@ class FilmService implements FilmServiceInterface {
 
   @override
   Future<FilmsResponse> getFilms() async {
-    final data = await _graphQLApiClient.performQuery(allFilmsQuery);
-    final allFilmsResponse = AllFilmsResponse.fromJson(data.data!);
-    return allFilmsResponse.allFilms;
+    final dataResponse = await _graphQLApiClient.performQuery<AllFilmsResponse>(
+      allFilmsQuery,
+      parserFn: AllFilmsResponse.fromJson,
+    );
+
+    return dataResponse.allFilms;
   }
 
   @override
   Future<FilmDetailsResponse> getFilmDetails(String filmId) async {
-    final data = await _graphQLApiClient.performQuery(
+    final dataResponse =
+        await _graphQLApiClient.performQuery<FilmDetailsResponse>(
       filmDetailsQuery,
       variables: {'filmId': filmId},
+      parserFn: FilmDetailsResponse.fromJson,
     );
 
-    final filmDetailsResponse = FilmDetailsResponse.fromJson(data.data!);
-    return filmDetailsResponse;
+    return dataResponse;
   }
 }

@@ -1,3 +1,5 @@
+import 'package:gql/language.dart';
+
 const allFilmsQuery = '''{
   allFilms {
     films {
@@ -28,3 +30,18 @@ const filmDetailsQuery = '''query Film(\$filmId: ID!) {
           }
         }
       }''';
+
+final characterDetailsQuery = parseString('''
+query Person(\$personId: ID!) {
+  person(id: \$personId) {
+    id
+    name
+    mass
+    skinColor
+    height
+    hairColor
+    gender
+    eyeColor
+    birthYear
+  }
+} ''');

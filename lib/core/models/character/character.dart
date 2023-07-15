@@ -13,6 +13,9 @@ class Character with _$Character {
     required String skinColor,
     required String birthYear,
     required String hairColor,
+    String? eyeColor,
+    String? gender,
+    int? mass,
     int? height,
   }) = _Character;
 

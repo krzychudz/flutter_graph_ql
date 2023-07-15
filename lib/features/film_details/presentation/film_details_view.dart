@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_graph_ql/core/theme/theme_extension.dart';
+import 'package:flutter_modular/flutter_modular.dart' hide Data;
 
 import '../../../core/models/film_details/film_details.dart';
 import '../../../core/widgets/general_error/general_error.dart';
 import '../../../core/widgets/labeled_info/labeled_info.dart';
 import '../../../core/widgets/loading_indicator/loading_indicator.dart';
+import '../../character_details/presentation/character_details_screen.dart';
 import '../bloc/film_details_cubit.dart';
 import '../bloc/state/film_details_cubit_state.dart';
 import 'widgets/character_item.dart';
@@ -91,7 +93,10 @@ class FilmDetailsDataSection extends StatelessWidget {
           SliverList.builder(
             itemBuilder: (context, index) => CharacterItem(
               character: filmDetails.characterConnection.characters[index],
-              onTap: (characterId) => print(characterId),
+              onTap: (characterId) => Modular.to.pushNamed(
+                CharacterDetailsScreen.route,
+                arguments: characterId,
+              ),
             ),
             itemCount: filmDetails.characterConnection.characters.length,
           ),
