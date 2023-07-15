@@ -41,18 +41,21 @@ class FilmsList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: films.length,
-      itemBuilder: (BuildContext context, int index) {
-        final film = films[index];
-        return FilmItem(
-          film: film,
-          onTap: (filmId) => Modular.to.pushNamed(
-            FilmDetailsScreen.route,
-            arguments: filmId,
-          ),
-        );
-      },
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 12),
+      child: ListView.builder(
+        itemCount: films.length,
+        itemBuilder: (BuildContext context, int index) {
+          final film = films[index];
+          return FilmItem(
+            film: film,
+            onTap: (filmId) => Modular.to.pushNamed(
+              FilmDetailsScreen.route,
+              arguments: filmId,
+            ),
+          );
+        },
+      ),
     );
   }
 }

@@ -18,6 +18,7 @@ const filmDetailsQuery = '''query Film(\$filmId: ID!) {
           created
           characterConnection {
             characters {
+              id
               name
               skinColor
               birthYear

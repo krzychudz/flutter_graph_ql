@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_graph_ql/core/theme/theme_extension.dart';
 
 import '../../../../../core/models/film/film.dart';
 
@@ -18,7 +19,10 @@ class FilmItem extends StatelessWidget {
       onTap: () => onTap?.call(film.episodeId),
       child: Card(
         child: ListTile(
-          title: Text(film.title),
+          title: Text(
+            film.title,
+            style: context.textTheme.labelLarge,
+          ),
           subtitle: Text(film.director),
           trailing: Text(film.releaseDate),
         ),

@@ -8,11 +8,12 @@ part 'character.g.dart';
 @freezed
 class Character with _$Character {
   factory Character({
+    required String id,
     required String name,
     required String skinColor,
     required String birthYear,
     required String hairColor,
-    required int height,
+    int? height,
   }) = _Character;
 
   factory Character.fromJson(Map<String, dynamic> json) =>
