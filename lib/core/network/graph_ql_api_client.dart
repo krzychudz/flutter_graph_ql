@@ -19,9 +19,17 @@ class GraphQLApiClient {
     String query, {
     Map<String, dynamic> variables = const {},
   }) async {
-    final options =
-        QueryOptions(document: parseString(query), variables: variables);
+    final options = QueryOptions(
+      document: parseString(query),
+      variables: variables,
+      fetchPolicy: FetchPolicy.cacheAndNetwork,
+      errorPolicy: ErrorPolicy.ignore,
+    );
     final result = await _client.query(options);
+
+    if (result.hasException) {
+      throw Exception(result.exception.toString());
+    }
 
     return result;
   }
@@ -33,6 +41,10 @@ class GraphQLApiClient {
     final options =
         MutationOptions(document: parseString(query), variables: variables);
     final result = await _client.mutate(options);
+
+    if (result.hasException) {
+      throw Exception(result.exception.toString());
+    }
 
     return result;
   }
