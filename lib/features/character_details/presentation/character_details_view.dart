@@ -5,7 +5,7 @@ import 'package:flutter_graph_ql/core/widgets/general_error/general_error.dart';
 import 'package:flutter_graph_ql/core/widgets/loading_indicator/loading_indicator.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 
-import '../../../core/models/character/character.dart';
+import 'widgets/character_details_section/character_details_section.dart';
 
 class CharacterDetailsView extends StatelessWidget {
   const CharacterDetailsView({
@@ -19,7 +19,7 @@ class CharacterDetailsView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Character Details'),
+        title: const Text('Character Details'),
       ),
       body: CharacterDetailsBody(characterId: characterId),
     );
@@ -34,37 +34,20 @@ class CharacterDetailsBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Query(
-        options: QueryOptions(
-          document: characterDetailsQuery,
-          variables: {'personId': characterId},
-          parserFn: CharacterResponse.fromJson,
-        ),
-        builder: (QueryResult<CharacterResponse> result,
-            {VoidCallback? refetch, FetchMore? fetchMore}) {
-          if (result.hasException) const GeneralError();
-          if (result.isLoading || result.parsedData == null) {
-            const LoadingIndicator();
-          }
+      options: QueryOptions(
+        document: characterDetailsQuery,
+        variables: {'personId': characterId},
+        parserFn: CharacterResponse.fromJson,
+      ),
+      builder: (QueryResult<CharacterResponse> result,
+          {VoidCallback? refetch, FetchMore? fetchMore}) {
+        if (result.hasException) const GeneralError();
+        if (result.isLoading) const LoadingIndicator();
 
-          print("HERE DATA: ${result.parsedData}");
-
-          return CharacterDetailsSection(
-            character: result.parsedData!.person,
-          );
-        });
-  }
-}
-
-class CharacterDetailsSection extends StatelessWidget {
-  const CharacterDetailsSection({
-    super.key,
-    required this.character,
-  });
-
-  final Character character;
-
-  @override
-  Widget build(BuildContext context) {
-    return const Placeholder();
+        return CharacterDetailsSection(
+          character: result.parsedData?.person,
+        );
+      },
+    );
   }
 }
